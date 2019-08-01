@@ -4,3 +4,12 @@ language: java
 node_js:
 - 11
 - 8
+deploy:
+  provider: releases
+  api_key:
+    secure: TEKRCDsimuos3apXsoqWmBeDFFDnsxDA/5EnaTMeTn6nzw388YznJ3hpM5BSShX1zH5Es5GP48GHxtnsppSMlVsVJ+mO152XzR/23aWZWKJ3OPYpIXi4l7sGlcyNyOFja9GiVEZGNM2T9RL9EgAsWmvjLMIoV3BoEtbvxhhtw3/FvpOC9jsaAQKGZShJYdImAEsQGz3yGKrTcS/vp6+kCyj8twLJsAXtwzU53NzZgFaBvyUJizZHUfCPrb7paxy9LI3U9+VfC7c1vtD7wQV1YAU/DLpxz7Bs4vROlbcJgvBPnfUmluiAMEfqIecTx86KbGcT8qdTVgIVyEvqL7TT66RloT2R3B59cvflgo8QxFAveVTcMVDpZjIyab/9rtOHwxE4yJpAxwooCKYoy9IapWXVVtFqv0CS/aYl2U32qF8rcSM9EAozeyFxP+deMRSF8Iq3h3JfEQldGFquTEbvZAIopVb8XNdiRxBen0rC3d+QhkrnNTVcCtbaGhyuRZ1FGWy7vIMMj5cy+pq5vLs27wGmYQYFvfr8eIOcxcZFg24eHSCxfyMiH9O/ToCxrjo1pvSf3UbI+AZDg1q+rNOqufK//T7pxZopj4jBKSzm5VCpW8Bm7O8KPEJquHiivZpw4ivBUK/BSg0UYWFsfCW8Bw7J1dvKrDCa+DP1zjzr+YM=
+  file_glob: true
+  file: target/ercole-server-*.jar
+  skip_cleanup: true
+  on:
+    repo: amreo/ercole-server
