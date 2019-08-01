@@ -238,7 +238,7 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <overwrite>true</overwrite>
+                            <overwrite>false</overwrite>
                             <url>https://github.com/amreo/ercole-agent/releases/download/${rpm7.version}/ercole-agent-${rpm7.version}-1.el7.x86_64.rpm</url>
                             <unpack>false</unpack>
                             <outputDirectory>${project.build.directory}/ercole-web/packages</outputDirectory>
@@ -251,7 +251,7 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <overwrite>true</overwrite>
+                            <overwrite>false</overwrite>
                             <url>https://github.com/amreo/ercole-agent/releases/download/${rpm6.version}/ercole-agent-${rpm6.version}-1.el6.x86_64.rpm</url>
                             <unpack>false</unpack>
                             <outputDirectory>${project.build.directory}/ercole-web/packages</outputDirectory>
@@ -264,7 +264,7 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <overwrite>true</overwrite>
+                            <overwrite>false</overwrite>
                             <url>https://github.com/amreo/ercole-agent-rhel5/releases/download/${rpm5.version}/ercole-agent-${rpm5.version}-1.x86_64.rpm</url>
                             <unpack>false</unpack>
                             <outputDirectory>${project.build.directory}/ercole-web/packages</outputDirectory>
@@ -277,7 +277,7 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <overwrite>true</overwrite>
+                            <overwrite>false</overwrite>
                             <url>https://github.com/amreo/ercole-agent/releases/download/${win.version}/ercole-agent-setup-${win.version}.exe</url>
                             <unpack>false</unpack>
                             <outputDirectory>${project.build.directory}/ercole-web/packages</outputDirectory>
@@ -290,7 +290,7 @@
                             <goal>wget</goal>
                         </goals>
                         <configuration>
-                            <overwrite>true</overwrite>
+                            <overwrite>false</overwrite>
                             <url>https://github.com/amreo/ercole-agent-virtualization/releases/download/${virtualization-rpm7.version}/ercole-agent-virtualization-${virtualization-rpm7.version}-1.el7.x86_64.rpm</url>
                             <unpack>false</unpack>
                             <outputDirectory>${project.build.directory}/ercole-web/packages</outputDirectory>

@@ -1,9 +1,13 @@
 os: linux
 dist: xenial
 language: java
-node_js:
-- 11
-- 8
+jdk:
+  - openjdk11
+  - openjdk8
+
+script:
+  mvn -X package
+
 deploy:
   provider: releases
   api_key:
