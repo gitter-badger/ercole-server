@@ -17,3 +17,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: amreo/ercole-server
+    jdk: openjdk11
