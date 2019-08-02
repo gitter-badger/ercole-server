@@ -6,8 +6,15 @@ jdk:
   - openjdk8
 
 env:
-  - PACKAGE_BUILD_IMAGE=sorintdev/rpmbuild-centos7 DIST=rhel7
+  global:
+    - PACKAGE_BUILD_IMAGE=sorintdev/rpmbuild-centos7
+    - WORKSPACE='/project'
+    - DIST=rhel7 
 
+service:
+  - docker
+
+sudo: required
  
 before_install:
   - sudo docker pull ${PACKAGE_BUILD_IMAGE}
@@ -20,14 +27,14 @@ install:
 
 
 script:
-  - mvn -X package
+  - mvn -q package
   - sed -i "s|ERCOLE_VERSION|${VERSION}|g" package/rhel7/ercole-agent.spec
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && rpmbuild --quiet -bl package/${DIST}/ercole-server.spec" || echo rpmbuild
   - docker exec -it package_builder /bin/sh -c "mkdir ~/rpmbuild/SOURCES/ercole-server-${VERSION}"
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp -r * ~/rpmbuild/SOURCES/ercole-server-${VERSION}/"
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && tar -C ~/rpmbuild/SOURCES -cvzf ~/rpmbuild/SOURCES/ercole-server-${VERSION}.tar.gz ercole-server-${VERSION}"
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && rpmbuild -bb package/${DIST}/ercole-server.spec"
-  - docker exec -it package_builder /bin/sh -c "find ~/rpmbuild/SOURCES/ercole-server-${VERSION}"
+  - docker exec -it package_builder /bin/sh -c "find ~/rpmbuild/"
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp ~/rpmbuild/RPMS/x86_64/ercole-server-${VERSION}-1.el*.x86_64.rpm targer/"
 after_failure:
   - find .
