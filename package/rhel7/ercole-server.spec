@@ -5,7 +5,7 @@ Summary:        Ercole server
 
 License:        Proprietary
 URL:            https://github.com/amreo/%{name}
-Source0:        https://github.com/amreo/%{name}/releases/download/%{version}/%{name}-%{version}.jar
+Source0:        https://github.com/amreo/%{name}/releases/download/%{version}/%{name}-%{version}.tar.gz
 Requires:       java-11-openjdk
 
 Group:          Tools
@@ -36,8 +36,8 @@ install -m 644 package/rhel7/ercole-server.service $RPM_BUILD_ROOT/etc/systemd/s
 %files
 %attr(-,ercole,-) /opt/ercole-server/run
 %dir /opt/ercole-server
-/opt/ercole-server/ercole-server.jar
 /etc/systemd/system/ercole-server.service
+/opt/ercole-server/ercole-server.jar
 
 %changelog
 * Mon Aug 2 2019 Andrea Laisa <alaisa@sorint.it>
