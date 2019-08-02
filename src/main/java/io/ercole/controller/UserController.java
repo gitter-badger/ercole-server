@@ -386,4 +386,14 @@ public class UserController {
 	public final Map<String, Object> getUsedDataHistory(@PathVariable final String hostname) {
 		return hostService.getUsedDataHistory(hostname);
 	}
+
+	/**
+	 * Return the segmentsSize data history of all databases of host.
+	 * @param hostname hostname
+	 * @return the segmentsSize data history of all databases of host
+	 */
+	@GetMapping("/hosts/{hostname}/segmentssizedatahistory")
+	public final Map<String, Object> getSegmentsSizeDataHistory(@PathVariable final String hostname) {
+		return hostService.getSegmentsSizeDataHistory(hostname);
+	}
 }

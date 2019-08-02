@@ -354,4 +354,22 @@ public class HostService {
 		}
 		return result;
 	}
+
+	/**
+	 * Return the segmentsSize data history of all databases of host.
+	 * @param hostname hostname
+	 * @return the segmentsSize data history of all databases of host
+	 */
+	public Map<String, Object> getSegmentsSizeDataHistory(final String hostname) {
+		CurrentHost current = currentRepo.findByHostname(hostname);
+		HashMap<String, Object> result = new HashMap<>();
+		if (current == null) {
+			return result;
+		}
+		String[] dbs = current.getDatabases().split(" "); 
+		for (String db : dbs) {
+			result.put(db, currentRepo.getSegmentsSizeDataHistory(hostname, db));
+		}
+		return result;
+	}
 }

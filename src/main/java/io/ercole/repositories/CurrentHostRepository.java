@@ -757,4 +757,39 @@ public interface CurrentHostRepository extends PagingAndSortingRepository<Curren
 		+ "		db->>'Name' = :dbname"
 		+ ") SELECT * FROM data ORDER BY updated ASC;")
 	List<Map<String, Object>> getUsedDataHistory(@Param("hostname") final String hostname, @Param("dbname") final String dbname);
+
+		/**
+	 * Return the 'segmentsSize' data history of the hostname/db.
+	 * @param hostname hostname
+	 * @param dbname dbname
+	 * @return the 'segmentsSize' data history of the hostname/db.
+	 */
+	@Query(nativeQuery = true, value = ""
+		+ "WITH data AS ("
+		+ "	SELECT "
+		+ "		updated,"
+		+ "		db->>'SegmentsSize' AS segmentsSize"
+		+ "	FROM "
+		+ "		current_host ch,"
+		+ "		jsonb_array_elements(CAST(extra_info AS jsonb)->'Databases') AS db"
+		+ "	WHERE "
+		+ "		hostname = :hostname AND"
+		+ "		(ch.host_type IS NULL OR ch.host_type = 'oracledb') AND"
+		+ "		db->>'Name' = :dbname AND"
+		+ "		db->'SegmentsSize' IS NOT NULL AND" 
+		+ "		db->>'SegmentsSize' != 'null'"
+		+ "	UNION ALL SELECT "
+		+ "		updated,"
+		+ "		db->>'SegmentsSize' AS segmentsSize"
+		+ "	FROM "
+		+ "		historical_host ch,"
+		+ "		jsonb_array_elements(CAST(extra_info AS jsonb)->'Databases') AS db"
+		+ "	WHERE "
+		+ "		hostname = :hostname AND"
+		+ "		(ch.host_type IS NULL OR ch.host_type = 'oracledb') AND"
+		+ "		db->>'Name' = :dbname AND"
+		+ "		db->'SegmentsSize' IS NOT NULL AND" 
+		+ "		db->>'SegmentsSize' != 'null'"
+		+ ") SELECT * FROM data ORDER BY updated ASC;")
+	List<Map<String, Object>> getSegmentsSizeDataHistory(@Param("hostname") final String hostname, @Param("dbname") final String dbname);
 }
