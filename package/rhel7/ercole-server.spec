@@ -26,6 +26,7 @@ exit 0
 %setup -q -n %{name}-%{version}
 
 rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT/opt/ercole-server
 install -m 755 ercole-server.jar $RPM_BUILD_ROOT/opt/ercole-server
 install -d $RPM_BUILD_ROOT/etc/systemd/system
 install -d $RPM_BUILD_ROOT/opt/ercole-server/run
