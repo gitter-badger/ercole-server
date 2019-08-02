@@ -26,7 +26,7 @@ exit 0
 %setup -q -n %{name}-%{version}
 
 rm -rf $RPM_BUILD_ROOT
-make DESTDIR=$RPM_BUILD_ROOT/opt/ercole-server install
+install -m 755 ercole-server.jar $RPM_BUILD_ROOT/opt/ercole-server/ercole-server.jar
 install -d $RPM_BUILD_ROOT/etc/systemd/system
 install -d $RPM_BUILD_ROOT/opt/ercole-server/run
 install -m 644 package/rhel7/ercole-server.service $RPM_BUILD_ROOT/etc/systemd/system/ercole-server.service
