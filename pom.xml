@@ -5,7 +5,7 @@
 
 	<groupId>io.ercole</groupId>
 	<artifactId>ercole-server</artifactId>
-	<version>1.5.0m</version> 
+	<version>1.5.0n</version> 
 
 	<properties>
     	<ercole-web.version>1.5.0i</ercole-web.version>
