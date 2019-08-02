@@ -41,7 +41,7 @@ script:
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp ercole-server-${VERSION}.jar ~/rpmbuild/SOURCES/ercole-server.jar"
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && rpmbuild -bb package/${DIST}/ercole-server.spec"
   - docker exec -it package_builder /bin/sh -c "find ~/rpmbuild/"
-  - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp ~/rpmbuild/RPMS/x86_64/ercole-server-${VERSION}-1.el*.x86_64.rpm targer/"
+  - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp ~/rpmbuild/RPMS/x86_64/ercole-server-${VERSION}-1.el*.x86_64.rpm target/"
 after_failure:
   - find .
 
