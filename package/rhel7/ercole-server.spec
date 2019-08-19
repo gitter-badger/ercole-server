@@ -1,5 +1,5 @@
 Name:           ercole-server
-Version:        
+Version:        ERCOLE_VERSION
 Release:        1%{?dist}
 Summary:        Ercole server	
 
