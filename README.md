@@ -7,7 +7,7 @@ This is the server component for the Ercole project. Documentation available [he
 - Java Developement Kit 8.
 - PostgreSQL server 9.6 or greater
 - The ercole-web and ercole-packages should be available on your local or remote maven repository
-
+ 
 ## How to build
 
     mvn clean package
