@@ -26,11 +26,15 @@ script:
   - mvn -q clean package
   - sed -i "s|ERCOLE_VERSION|${VERSION}|g" package/rhel7/ercole-server.spec
   - docker exec -it package_builder /bin/sh -c "mkdir -p ~/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}"
-  - docker exec -it package_builder /bin/sh -c "ln -s ${WORKSPACE} ~/rpmbuild/SOURCES/ercole-server.${VERSION}.tar.gz"
+  - docker exec -it package_builder /bin/sh -c "ln -s ${WORKSPACE} ~/rpmbuild/SOURCES/ercole-server-${VERSION}"
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && rpmbuild -bb package/${DIST}/ercole-server.spec"
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp ~/rpmbuild/RPMS/x86_64/ercole-server-${VERSION}-1.el*.x86_64.rpm target/"
-after_failure:
+  - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp ~/rpmbuild/RPMS/x86_64/ercole-server-${VERSION}-1.el*.x86_64.rpm target/"
+  - ls -al target
+  after_failure:
   - find .
+  - docker exec -it package_builder /bin/sh -c "find ~/rpmbuild"
+
 
 deploy:
   provider: releases
