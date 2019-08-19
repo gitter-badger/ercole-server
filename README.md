@@ -1,4 +1,5 @@
 # ercole-server
+[![Build Status](https://travis-ci.org/amreo/ercole-server.svg?branch=master)](https://travis-ci.org/amreo/ercole-server)
 
 This is the server component for the Ercole project. Documentation available [here](https://ercole.netlify.com).
 

@@ -1,5 +1,5 @@
 os: linux
-dist: xenial
+dist: trusty
 language: java
 jdk:
   - openjdk11
@@ -30,7 +30,10 @@ script:
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && rpmbuild -bb package/${DIST}/ercole-server.spec"
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp ~/rpmbuild/RPMS/x86_64/ercole-server-${VERSION}-1.el*.x86_64.rpm target/"
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp ~/rpmbuild/RPMS/x86_64/ercole-server-${VERSION}-1.el*.x86_64.rpm target/"
+  - sudo chmod -R a+rwx .
   - ls -al target
+  - whoami
+  - ls target/ercole-server-*.*
 after_failure:
   - find .
   - docker exec -it package_builder /bin/sh -c "find ~/rpmbuild"
