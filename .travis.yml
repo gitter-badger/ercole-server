@@ -31,7 +31,7 @@ script:
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp ~/rpmbuild/RPMS/x86_64/ercole-server-${VERSION}-1.el*.x86_64.rpm target/"
   - docker exec -it package_builder /bin/sh -c "cd ${WORKSPACE} && cp ~/rpmbuild/RPMS/x86_64/ercole-server-${VERSION}-1.el*.x86_64.rpm target/"
   - ls -al target
-  after_failure:
+after_failure:
   - find .
   - docker exec -it package_builder /bin/sh -c "find ~/rpmbuild"
 
