@@ -6,7 +6,7 @@ After=syslog.target network.target
 Type=simple
 WorkingDirectory=/opt/ercole-server/
 User=ercole
-ExecStart=java -jar /opt/ercole-server/ercole-server.jar
+ExecStart=/usr/bin/java -jar /opt/ercole-server/ercole-server.jar
 PIDFile=/opt/ercole-server/run/ercole-server.pid
 
 [Install]

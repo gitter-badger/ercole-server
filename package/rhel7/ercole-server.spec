@@ -1,44 +1,46 @@
 Name:           ercole-server
-Version:        ERCOLE_VERSION
+Version:        
 Release:        1%{?dist}
-Summary:        Ercole server
+Summary:        Ercole server	
 
-License:        Proprietary
-URL:            https://github.com/amreo/%{name}
-Source0:        https://github.com/amreo/%{name}/releases/download/%{version}/%{name}-%{version}.tar.gz
+License:        ASL 2.0
+URL:            https://ercole.io            
+Source0:        https://github.com/amreo/%{name}/archive/%{version}.tar.gz
+Group:          Tools
 Requires:       java-11-openjdk
 
-Group:          Tools
-
-Buildroot: /tmp/rpm-ercole-server
-
-%global debug_package %{nil}
+Buildroot:      /tmp/rpm-ercole-server
+%global         debug_package %{nil}
+%define         __jar_repack 0
 
 %description
 This is the server component for the Ercole project.
 
+%global debug_package %{nil}
+
 %pre
-getent passwd ercole >/dev/null || \
-    useradd -s /bin/bash -c "Ercole server user" ercole
-exit 0
+    getent passwd ercole >/dev/null || useradd -s /bin/bash -c "Ercole server user" ercole
 
 %prep
-%setup -q -n %{name}-%{version}
+rm -rf %{_topdir}/BUILD/%{name}-%{version}
+cp -rf %{_topdir}/SOURCES/%{name}-%{version} %{_topdir}/BUILD/%{name}-%{version}
+cd %{_topdir}/BUILD/%{name}-%{version}
+chown -R root.root .
+chmod -Rf a+rX,u+w,g-w,o-w .
+cp target/%{name}-%{version}.jar %{name}.jar
+cp package/rhel7/%{name}.service %{name}.service
 
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/opt/ercole-server
-install -m 755 ercole-server.jar $RPM_BUILD_ROOT/opt/ercole-server
-install -d $RPM_BUILD_ROOT/etc/systemd/system
-install -d $RPM_BUILD_ROOT/opt/ercole-server/run
-install -m 644 package/rhel7/ercole-server.service $RPM_BUILD_ROOT/etc/systemd/system/ercole-server.service
-
-%post
+%install
+cd %{_topdir}/BUILD/%{name}-%{version}
+mkdir -p %{buildroot}/opt/%{name}/run %{buildroot}/etc/systemd/system
+install -m 0755 %{name}.jar %{buildroot}/opt/%{name}/%{name}.jar
+install -m 0644 %{name}.service %{buildroot}/etc/systemd/system/%{name}.service
 
 %files
 %attr(-,ercole,-) /opt/ercole-server/run
 %dir /opt/ercole-server
-/etc/systemd/system/ercole-server.service
 /opt/ercole-server/ercole-server.jar
+/etc/systemd/system/ercole-server.service
 
 %changelog
 * Mon Aug 2 2019 Andrea Laisa <alaisa@sorint.it>
